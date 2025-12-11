@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyFly - Flight Booking</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f4f6f9; color: #333; }
+
+    header { width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; background: #0b3d91; color: white; position: fixed; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    header h1 { font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+    nav a { color: #ffffff; margin-left: 30px; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+    nav a:hover { color: #ffcc00; }
+    
+    .hero { height: 90vh; overflow: hidden; margin-top: 60px; position: relative; border-bottom: 3px solid #0b3d91; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; border-radius: 0 0 20px 20px; }
+
+    .hero-text { text-align: center; max-width: 700px; margin: 20px auto 20px auto; position: relative; z-index: 10; }
+    .hero-text h1 { font-size: 48px; color: #0b3d91; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(0,0,0,0.2); }
+    .hero-text p { font-size: 22px; color: #555; line-height: 1.6; }
+
+    .booking-box { width: 380px; background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 12px 30px rgba(0,0,0,0.2); margin: 20px auto 40px auto; position: relative; z-index: 20; }
+    .booking-box h2 { text-align: center; margin-bottom: 25px; color: #0b3d91; font-size: 26px; }
+    .input-group { margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 8px; }
+    input, select { width: 95%; padding: 12px; border-radius: 12px; border: 1px solid #ccc; font-size: 15px; }
+
+    button { width: 95%; padding: 14px; background: #0b3d91; color: white; border: none; border-radius: 14px; font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; }
+    button:hover { background: #062b5b; transform: translateY(-2px); }
+
+    .section { padding: 80px 40px; text-align: center; background: #eef2f6; }
+    .section h2 { color: #0b3d91; font-size: 36px; margin-bottom: 40px; }
+    .features { display: flex; justify-content: center; flex-wrap: wrap; gap: 35px; }
+    .card { width: 320px; background: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 12px 25px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+    .card h3 { margin-bottom: 15px; color: #0b3d91; font-size: 22px; }
+    .card p { color: #555; font-size: 16px; line-height: 1.6; }
+
+    @media(max-width: 768px){
+      .features { flex-direction: column; align-items: center; }
+      .booking-box { width: 90%; }
+      .hero-text h1 { font-size: 36px; }
+      .hero-text p { font-size: 18px; }
+      .nav-login { flex-direction: column; gap: 10px; }
+      nav { gap: 10px; }
+    }
+    .nav-login { 
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
+}
+
+nav { 
+  display: flex; 
+  gap: 15px; 
+}
+
+.header-login { 
+  padding:6px 12px; 
+  width:auto; 
+  background:#ffcc00; 
+  color:#0b3d91; 
+  border:none; 
+  border-radius:6px; 
+  cursor:pointer; 
+  font-weight:600; 
+  font-size:14px; 
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+  <h1>SkyFly</h1>
+  <div class="nav-login">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Flights</a>
+      <a href="#">Offers</a>
+      <a href="#">Support</a>
+    </nav>
+    <button class="header-login" onclick="openModal()">Login / Sign Up</button>
+  </div>
+</header>
+
+  <div class="hero">
+    <img class="hero-img" src="https://alroufled.com/wp-content/uploads/A-Guide-to-Modern-Aviation.webp" id="slideImage" />
+  </div>
+
+  <div class="hero-text">
+    <h1>Fly Higher, Travel Smarter</h1>
+    <p>Book your perfect flight with ease and comfort. Discover amazing destinations and unbeatable deals!</p>
+  </div>
+
+  <div class="booking-box">
+    <h2>Book Your Flight</h2>
+    <div class="input-group">
+      <label>From</label>
+      <input type="text" placeholder="Delhi (DEL)" />
+    </div>
+    <div class="input-group">
+      <label>To</label>
+      <input type="text" placeholder="Mumbai (BOM)" />
+    </div>
+    <div class="input-group">
+      <label>Date</label>
+      <input type="date" />
+    </div>
+    <div class="input-group">
+      <label>Passengers</label>
+      <select>
+        <option>Young</option>
+        <option>Adult</option>
+        <option>Elder</option>
+      </select>
+    </div>
+    <button>Search Flights</button>
+  </div>
+
+  <section class="section">
+    <h2>Why Choose Us?</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Lowest Prices</h3>
+        <p>Unlock the best flight deals and save big on your travels.</p>
+      </div>
+      <div class="card">
+        <h3>24/7 Support</h3>
+        <p>We’re always here to help you, wherever you are.</p>
+      </div>
+      <div class="card">
+        <h3>Fast Booking</h3>
+        <p>Secure your flight in seconds with our easy-to-use system.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const images = [
+      'https://alroufled.com/wp-content/uploads/A-Guide-to-Modern-Aviation.webp',
+      'https://assets.gqindia.com/photos/667560b5241db9ce94e8d289/16:9/w_1920,h_1080,c_limit/What%E2%80%99s-the-safest-seat-on-an-airplane.jpg',
+      'https://media.cntraveler.com/photos/607ef41f211142d4f98867a3/3:2/w_2560%2Cc_limit/Will%2520Cheaper%2520Pandemic%2520Airfares%2520Last%2520through%2520the%2520Summer_GettyImages-1140598797.jpg',
+      'https://media.nomadicmatt.com/2024/flighttips1.jpeg',
+      'https://t4.ftcdn.net/jpg/03/06/22/79/360_F_306227987_7dUhRHcDgpXsZffS0pfaQnp5f3W5FXRC.jpg'
+    ];
+    let index = 0;
+    const slideImage = document.getElementById('slideImage');
+
+    function fadeImage(nextIndex) {
+      slideImage.style.transition = 'opacity 2s ease-in-out';
+      slideImage.style.opacity = 0;
+      setTimeout(() => {
+        slideImage.src = images[nextIndex];
+        slideImage.style.opacity = 1;
+        index = nextIndex;
+      }, 1000);
+    }
+
+    setInterval(() => {
+      const nextIndex = (index + 1) % images.length;
+      fadeImage(nextIndex);
+    }, 5000);
+  </script>
+
+  <section class="section" style="background:#fff;">
+    <h2>AI‑Powered Smart Suggestions</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Cheapest Flight Today</h3>
+        <p>Our AI found the lowest fare: <strong>Delhi → Goa – ₹2,899</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>Best Time to Book</h3>
+        <p>Prices usually drop by <strong>Tuesday night</strong> for this route.</p>
+      </div>
+      <div class="card">
+        <h3>Popular Weekend Routes</h3>
+        <p>Travellers are booking: <strong>Mumbai → Dubai</strong> this weekend.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;">
+    <h2>Popular Destinations</h2>
+    <div class="features">
+      <div class="card"><h3>Delhi → Dubai</h3><p>Starting at ₹12,999</p></div>
+      <div class="card"><h3>Mumbai → London</h3><p>Starting at ₹38,499</p></div>
+      <div class="card"><h3>Bangalore → Singapore</h3><p>Starting at ₹9,999</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What Our Travelers Say</h2>
+    <div class="features">
+      <div class="card"><p>“Super smooth booking experience!” – Rohan</p></div>
+      <div class="card"><p>“Great prices and fast support.” – Ananya</p></div>
+      <div class="card"><p>“Highly reliable for international flights.” – Kabir</p></div>
+    </div>
+  </section>
+
+  <footer style="background:#0b3d91; color:white; padding:40px 20px; text-align:center; margin-top:40px;">
+    <p>© 2025 SkyFly Airlines. All Rights Reserved.</p>
+    <p>Contact • Privacy Policy • Terms & Conditions</p>
+    <section class="section" style="background: linear-gradient(135deg, #e8f0fa, #f4f7fb); border-top: 4px solid #0b3d91; position:relative;">
+    <h2>Interactive Route Map</h2>
+    <p style="margin-bottom:25px; font-size:18px; color:#555;">Explore our most popular international flight routes.</p>
+
+    <div style="position:relative; display:flex; justify-content:center;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png" 
+        style="width:80%; max-width:900px; border-radius:20px; border:4px solid #0b3d91; box-shadow:0 12px 30px rgba(0,0,0,0.25); filter:saturate(1.3);" />
+
+      <!-- Animated SVG Routes -->
+      <svg width="80%" height="100%" style="position:absolute; top:0; left:10%; pointer-events:none;">
+        <defs>
+          <style>
+            @keyframes routeFade {
+              0% { stroke-dashoffset: 200; opacity:0; }
+              50% { opacity:1; }
+              100% { stroke-dashoffset: 0; opacity:1; }
+            }
+          </style>
+        </defs>
+
+        <!-- Example Route: India to Dubai -->
+        <path d="M 430 260 Q 520 230 600 260" stroke="#0b3d91" stroke-width="3" fill="none"
+          style="stroke-dasharray:200; animation: routeFade 4s infinite alternate;" />
+
+        <!-- Example Route: India to Singapore -->
+        <path d="M 430 260 Q 500 300 550 340" stroke="#ff6600" stroke-width="3" fill="none"
+          style="stroke-dasharray:200; animation: routeFade 4s 1s infinite alternate;" />
+
+        <!-- Example Route: India to London -->
+        <path d="M 430 260 Q 400 180 350 140" stroke="#009933" stroke-width="3" fill="none"
+          style="stroke-dasharray:220; animation: routeFade 4s 2s infinite alternate;" />
+      </svg>
+    </div>
+  </section>
+
+<footer style="background:#0b3d91; color:white; padding:40px 20px; text-align:center; margin-top:40px;">
+
+
+<!-- Login / Sign Up Modal -->
+<div id="authModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:white; width:350px; padding:30px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3); text-align:center;">
+    <h2 style="color:#0b3d91; margin-bottom:20px;">Login / Sign Up</h2>
+    
+
+    <input type="email" placeholder="Enter Email" style="width:90%; padding:12px; margin-bottom:15px; border-radius:10px; border:1px solid #bbb;" />
+    <input type="password" placeholder="Enter Password" style="width:90%; padding:12px; margin-bottom:20px; border-radius:10px; border:1px solid #bbb;" />
+
+    <button style="width:95%; padding:12px; background:#0b3d91; color:white; border:none; border-radius:10px; font-size:16px; font-weight:bold; cursor:pointer;">Continue</button>
+    <p style="margin-top:12px; font-size:14px; color:#555; cursor:pointer;" onclick="closeModal()">Cancel</p>
+  </div>
+</div>
+
+<script>
+  function openModal(){ document.getElementById('authModal').style.display = 'flex'; }
+  function closeModal(){ document.getElementById('authModal').style.display = 'none'; }
+</script>
+
+</body>
+</html>
